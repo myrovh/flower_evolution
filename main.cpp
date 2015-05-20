@@ -7,12 +7,14 @@
 #include <math.h>
 
 #include "GL_routines.h"
+#include "Flower.h"
 using namespace std;
 
 // because OpenGL works using eventHandlers you will need to define
 // a few global variables. For example...
 
 // YOUR_CREATURE_TYPE	gYourCreatureCollectionDataStruct;
+Flower test_flower;
 
 int gWinRows = 500;
 int gWinCols = 500;
@@ -71,6 +73,7 @@ int main(int argc, char **argv) {
     // This routine makes the graphics window take up the whole screen
     // for when you want this to work in game mode
     // glutFullScreen();
+    cout << test_flower.get_flower_stats();
 
     // Do some of your own initializations in this routine
     myInitializeOpenGL();
