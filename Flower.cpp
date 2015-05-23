@@ -7,6 +7,7 @@
 
 const double Flower::range_min = 0.0;
 const double Flower::range_max = 1.0;
+const int Flower::fixed_seed = 42;
 
 Flower::Flower() {
     flower_genes[petal_radius] = generate_value();
@@ -16,13 +17,17 @@ Flower::Flower() {
     flower_genes[number_of_edges] = generate_value();
 }
 
-double Flower::generate_value() { return range_max; }
+double Flower::generate_value() {
+    static std::default_random_engine engine{fixed_seed};
+    static std::uniform_real_distribution<double> distribution{range_min, range_max};
+    return distribution(engine);
+}
 
 std::string Flower::get_flower_stats() {
     std::ostringstream stream;
     std::string temp_string;
-    for (flower_genotype::iterator it = flower_genes.begin(); it != flower_genes.end(); ++it) {
-        stream << it->first << " => " << it->second << '\n';
+    for (auto iterator = flower_genes.begin(); iterator != flower_genes.end(); ++iterator) {
+        stream << iterator->first << " => " << iterator->second << '\n';
     }
 
     temp_string = stream.str();

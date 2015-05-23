@@ -8,7 +8,7 @@
 #include <string>
 #include <map>
 #include <sstream>
-
+#include <random>
 
 enum flower_gene {
     petal_radius,
@@ -22,15 +22,13 @@ typedef std::map<flower_gene, double> flower_genotype;
 class Flower {
 public:
     Flower();
-
     double generate_value();
-
     std::string get_flower_stats();
 
 private:
     static const double range_min;
     static const double range_max;
-
+    static const int fixed_seed;
     flower_genotype flower_genes;
 };
 

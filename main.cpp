@@ -15,6 +15,7 @@ using namespace std;
 
 // YOUR_CREATURE_TYPE	gYourCreatureCollectionDataStruct;
 Flower test_flower;
+Flower test_flower_2;
 
 int gWinRows = 500;
 int gWinCols = 500;
@@ -74,6 +75,7 @@ int main(int argc, char **argv) {
     // for when you want this to work in game mode
     // glutFullScreen();
     cout << test_flower.get_flower_stats();
+    cout << test_flower_2.get_flower_stats();
 
     // Do some of your own initializations in this routine
     myInitializeOpenGL();

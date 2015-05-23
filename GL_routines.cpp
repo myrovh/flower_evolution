@@ -128,7 +128,7 @@ void mouseMove(int x, int y) {
     static bool firstCall = true;
 
     // What is the use of this if statement?
-    if (firstCall == true) {
+    if (firstCall) {
         oldX = x;
         oldY = y;
         firstCall = false;
@@ -179,7 +179,6 @@ void menu_select(int mode) {
             break;
         default:
             return;
-            break;
     }
 }
 
