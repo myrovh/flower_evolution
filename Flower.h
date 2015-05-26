@@ -22,13 +22,14 @@ typedef std::map<flower_gene, double> flower_genotype;
 class Flower {
 public:
     Flower();
-    double generate_value();
+
+    double generate_value(bool clamp);
     std::string get_flower_stats();
 
 private:
     static const double range_min;
     static const double range_max;
-    static const int fixed_seed;
+    static const unsigned long fixed_seed;
     flower_genotype flower_genes;
 };
 

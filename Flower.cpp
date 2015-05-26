@@ -7,18 +7,23 @@
 
 const double Flower::range_min = 0.0;
 const double Flower::range_max = 1.0;
-const int Flower::fixed_seed = 42;
+const unsigned long Flower::fixed_seed = 42;
 
 Flower::Flower() {
-    flower_genes[petal_radius] = generate_value();
-    flower_genes[red] = generate_value();
-    flower_genes[green] = generate_value();
-    flower_genes[blue] = generate_value();
-    flower_genes[number_of_edges] = generate_value();
+    flower_genes[petal_radius] = generate_value(true);
+    flower_genes[red] = generate_value(true);
+    flower_genes[green] = generate_value(true);
+    flower_genes[blue] = generate_value(true);
+    flower_genes[number_of_edges] = generate_value(true);
 }
 
-double Flower::generate_value() {
+double Flower::generate_value(bool clamp) {
     static std::default_random_engine engine{fixed_seed};
+    if (clamp) {
+        static std::uniform_int_distribution<int> int_distribution{1, 10};
+        double value = ((double) int_distribution(engine)) / 10;
+        return value;
+    }
     static std::uniform_real_distribution<double> distribution{range_min, range_max};
     return distribution(engine);
 }
