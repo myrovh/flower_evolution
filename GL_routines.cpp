@@ -14,6 +14,8 @@ extern void cleanQuit();
 
 extern World *g_test_world;
 
+extern std::string input_stream;
+
 void myInitializeOpenGL(void) {
     // Set the background/clear-the-screen colour
     glClearColor(0.02, 0.02, 0.02, 0.0);
@@ -28,29 +30,35 @@ void myInitializeOpenGL(void) {
 }
 
 void displayWorld(void) {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);    // clear the screen and clear the depth-buffer
-    glLoadIdentity();                                    // load the identity matrix
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glLoadIdentity();
 
-    // Display your gYourCreatureCollectionDataStruct here
-    // for example call gYourCreatureCollectionDataStruct->display()
-    // for example call gYourPlayerCharacterDataStruct->display()
-
-    // for this example, just draw some circles...
     int draw_call_count = 0;
     for (auto f : g_test_world->flower_container) {
+        //START Render flower petal
         glPushMatrix();
         std::pair<int, int> grid_location = g_test_world->get_flower_location(draw_call_count);
         glTranslated(grid_location.first, grid_location.second, 0);
         f->draw_petal();
         glPopMatrix();
+        //END
+
+        //START render flower number
+        std::stringstream stream;
+        stream << draw_call_count;
+        glPushMatrix();
+        glTranslated(grid_location.first, grid_location.second - 15, 0);
+        glScalef(0.03, 0.03, 0.03);
+        for (auto character = stream.str().begin(); character < stream.str().end(); character++) {
+            glutStrokeCharacter(GLUT_STROKE_ROMAN, (*character));
+        }
+        glPopMatrix();
+        //END
 
         draw_call_count++;
     }
 
-    // What does this routine do?
     glFlush();
-
-    // This routine "swaps buffers"
     glutSwapBuffers();
 }
 
@@ -82,28 +90,40 @@ void keyboard(unsigned char key, int x, int y) {
             // Call your cleanQuit routine to quit neatly
             cleanQuit();
             break;
-
-            // Assign keys to do different things in you code. For example you might like to....
-        case 'a':
-            // Do stuff here when the 'a' key is pressed
-            // E.g. update your gYourCreatureCollectionDataStruct maybe?
-            // or maybe gYourPlayerCharacterDataStruct->update()?
-
-            // After that, you may want to tell OpenGL to redraw the screen like this...
-            glutPostRedisplay();
+        case '1':
+            input_stream += '1';
             break;
-
-        case 'A':
-            // Do other stuff here when 'A' key is pressed...
-            // E.g. update your gYourCreatureCollectionDataStruct differently maybe?
-            // or maybe gYourPlayerCharacterDataStruct->update()?
-            // Or adjust the view? Its up to you!
-
-            // Remember that if you make a change which requires the screen to redrawn,
-            // post a "display" message...
-            glutPostRedisplay();
+        case '2':
+            input_stream += '2';
             break;
-
+        case '3':
+            input_stream += '3';
+            break;
+        case '4':
+            input_stream += '4';
+            break;
+        case '5':
+            input_stream += '5';
+            break;
+        case '6':
+            input_stream += '6';
+            break;
+        case '7':
+            input_stream += '7';
+            break;
+        case '8':
+            input_stream += '8';
+            break;
+        case '9':
+            input_stream += '9';
+            break;
+        case '0':
+            input_stream += '0';
+            break;
+        case 13: //Enter key
+            g_test_world->selection_check(input_stream);
+            input_stream = "";
+            break;
         default:
             // Do something or nothing by default when a key you haven't used is pressed here...
             break;
@@ -114,9 +134,6 @@ void mouse(int button, int state, int x, int y) {
     switch (button) {
         case GLUT_LEFT_BUTTON:
             if (state == GLUT_DOWN) {
-                // Do something e.g. gYourPlayerCharacterDataStruct->update()
-
-                // and maybe redisplay...
                 glutPostRedisplay();
             }
             break;

@@ -25,11 +25,16 @@ class Flower {
 public:
     static const double range_min;
     static const double range_max;
+    static const int crossover_frequency;
+    static const double mutation_chance;
     static const unsigned long fixed_seed;
+    bool is_selected;
 
     Flower();
 
     double generate_value(bool clamp);
+
+    Flower crossover(Flower other);
 
     void draw_petal();
     std::string get_flower_stats();

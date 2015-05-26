@@ -20,7 +20,6 @@ World::World(int world_size) {
     else {
         number_of_flowers = world_size * world_size;
     }
-    //number_of_flowers = world_size;
 
     for (int i = 0; i < number_of_flowers; i++) {
         flower_container.push_back(new Flower());
@@ -29,6 +28,9 @@ World::World(int world_size) {
     this->world_size = world_size;
     grid_spacing_x = 30;
     grid_spacing_y = 30;
+
+    parent_1 = nullptr;
+    parent_2 = nullptr;
 }
 
 std::pair<int, int> World::get_flower_location(int flower_position) {
@@ -44,4 +46,31 @@ std::pair<int, int> World::get_flower_location(int flower_position) {
             count++;
         }
     }
+}
+
+void World::selection_check(std::string input_string) {
+    std::stringstream convert;
+    convert << input_string;
+    int selected_flower = -1;
+    convert >> selected_flower;
+    if (selected_flower >= 0 && selected_flower < flower_container.size()) {
+        if (parent_1 != nullptr && parent_2 != nullptr) {
+            deselect_all_parents();
+        }
+        else if (parent_1 == nullptr) {
+            parent_1 = flower_container[selected_flower];
+            parent_1->is_selected = true;
+        }
+        else if (parent_2 == nullptr) {
+            parent_2 = flower_container[selected_flower];
+            parent_2->is_selected = true;
+        }
+    }
+}
+
+void World::deselect_all_parents() {
+    parent_1->is_selected = false;
+    parent_2->is_selected = false;
+    parent_1 = nullptr;
+    parent_2 = nullptr;
 }

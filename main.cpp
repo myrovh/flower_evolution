@@ -15,6 +15,7 @@ using namespace std;
 
 // YOUR_CREATURE_TYPE	gYourCreatureCollectionDataStruct;
 World *g_test_world = new World(6);
+std::string input_stream;
 
 int gWinRows = 500;
 int gWinCols = 500;

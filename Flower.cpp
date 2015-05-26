@@ -7,6 +7,8 @@
 
 const double Flower::range_min = 0.0;
 const double Flower::range_max = 1.0;
+const int Flower::crossover_frequency = 1;
+const double Flower::mutation_chance = 0.15;
 const unsigned long Flower::fixed_seed = 42;
 
 Flower::Flower() {
@@ -16,6 +18,7 @@ Flower::Flower() {
     flower_genes[blue] = generate_value(false);
     double edge_value = 10 * generate_value(true);
     flower_genes[number_of_edges] = edge_value > 1.0 ? edge_value : 2.0;
+    is_selected = false;
 }
 
 double Flower::generate_value(bool clamp) {
@@ -61,5 +64,17 @@ void Flower::draw_petal() {
         current_point_y = center_y + (flower_genes[petal_radius] * sin(angle_radians));
         glVertex2f((GLfloat) current_point_x, (GLfloat) current_point_y);
     }
+
     glEnd();
+
+    if (is_selected) {
+        glColor3d(1.0, 0.0, 0.0);
+
+        glBegin(GL_LINE_LOOP);
+        glVertex2f((GLfloat) -10.0, (GLfloat) 10.0);
+        glVertex2f((GLfloat) 10.0, (GLfloat) 10.0);
+        glVertex2f((GLfloat) 10.0, (GLfloat) -10.0);
+        glVertex2f((GLfloat) -10.0, (GLfloat) -10.0);
+        glEnd();
+    }
 }
