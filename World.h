@@ -18,8 +18,6 @@ private:
     const static int range_min;
     const static int range_max;
     int number_of_flowers;
-
-
 };
 
 #endif //FIT3094_AI_ASSIGNMENT2_WORLD_H
