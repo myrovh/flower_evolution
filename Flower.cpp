@@ -15,13 +15,7 @@ Flower::Flower() {
     flower_genes[green] = generate_value(false);
     flower_genes[blue] = generate_value(false);
     double edge_value = 10 * generate_value(true);
-    if (edge_value > 1.0) {
-
-        flower_genes[number_of_edges] = edge_value;
-    }
-    else {
-        flower_genes[number_of_edges] = 2.0;
-    }
+    flower_genes[number_of_edges] = edge_value > 1.0 ? edge_value : 2.0;
 }
 
 double Flower::generate_value(bool clamp) {
