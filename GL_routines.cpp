@@ -8,10 +8,11 @@
 
 #include <iostream>
 #include "GL_routines.h"
+#include "World.h"
 
 extern void cleanQuit();
 
-extern void drawCircleXZWire(const double, const double, const double);
+extern World *g_test_world;
 
 void myInitializeOpenGL(void) {
     // Set the background/clear-the-screen colour
@@ -35,9 +36,9 @@ void displayWorld(void) {
     // for example call gYourPlayerCharacterDataStruct->display()
 
     // for this example, just draw some circles...
-    drawCircleXZWire(10, 100, 10);
-    drawCircleXZWire(0, 20, 5);
-    drawCircleXZWire(-10, -10, 20);
+    for (auto f : g_test_world->flower_container) {
+        f->draw_petal();
+    }
 
     // What does this routine do?
     glFlush();

@@ -9,6 +9,8 @@
 #include <map>
 #include <sstream>
 #include <random>
+#include <GL/gl.h>
+#include <math.h>
 
 enum flower_gene {
     petal_radius,
@@ -21,15 +23,18 @@ typedef std::map<flower_gene, double> flower_genotype;
 
 class Flower {
 public:
-    Flower();
-
-    double generate_value(bool clamp);
-    std::string get_flower_stats();
-
-private:
     static const double range_min;
     static const double range_max;
     static const unsigned long fixed_seed;
+
+    Flower();
+
+    double generate_value(bool clamp);
+
+    void draw_petal();
+    std::string get_flower_stats();
+
+private:
     flower_genotype flower_genes;
 };
 

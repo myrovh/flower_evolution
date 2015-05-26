@@ -14,7 +14,7 @@ using namespace std;
 // a few global variables. For example...
 
 // YOUR_CREATURE_TYPE	gYourCreatureCollectionDataStruct;
-World *test_world = new World(5);
+World *g_test_world = new World(1);
 
 int gWinRows = 500;
 int gWinCols = 500;
@@ -24,38 +24,6 @@ int gWinCols = 500;
 void cleanQuit() {
     // put code in here to print out the message and quit the program
     exit(0);
-}
-
-
-// ! UNTESTED Circle code that doesn't use anything other than openGL...
-void drawCircleXZWire(const double centX, const double centZ, const double radius) {
-    double PI = 3.141;
-    long numSteps = 20;
-    double angle = 0;
-    double stepSize = (2 * PI) / (double) numSteps;
-
-    double colourRedComponent = 1.0;
-    double colourGreenComponent = 1.0;
-    double colourBlueComponent = 1.0;
-
-    // set the current colour (white R=G=B=1)
-    glColor3d(colourRedComponent, colourGreenComponent, colourBlueComponent);
-
-    double curPoint[3];
-    double centY = 0;
-    curPoint[1] = centY; // draw the circle in the Y=0 (XZ) plane
-
-    // replace this line with: glBegin(GL_POLYGON); in order to draw a filled circle
-    glBegin(GL_POLYGON);
-
-    for (angle = 0; angle < (2 * PI); angle += stepSize) {
-        curPoint[0] = centX + (radius * cos(angle));
-        curPoint[2] = centZ + (radius * sin(angle));
-
-        //glVertex3dv(curPoint);
-        glVertex2f(curPoint[0], curPoint[2]);
-    }
-    glEnd();
 }
 
 int main(int argc, char **argv) {
@@ -73,7 +41,7 @@ int main(int argc, char **argv) {
     // This routine makes the graphics window take up the whole screen
     // for when you want this to work in game mode
     // glutFullScreen();
-    for (auto i : test_world->flower_container) {
+    for (auto i : g_test_world->flower_container) {
         cout << "New Flower: \n";
         cout << i->get_flower_stats();
     }

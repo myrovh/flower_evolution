@@ -17,6 +17,7 @@ World::World(int world_size) {
     else {
         number_of_flowers = world_size * world_size;
     }
+    //number_of_flowers = world_size;
 
     for (int i = 0; i < number_of_flowers; i++) {
         flower_container.push_back(new Flower());
