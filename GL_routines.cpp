@@ -36,8 +36,15 @@ void displayWorld(void) {
     // for example call gYourPlayerCharacterDataStruct->display()
 
     // for this example, just draw some circles...
+    int draw_call_count = 0;
     for (auto f : g_test_world->flower_container) {
+        glPushMatrix();
+        std::pair<int, int> grid_location = g_test_world->get_flower_location(draw_call_count);
+        glTranslated(grid_location.first, grid_location.second, 0);
         f->draw_petal();
+        glPopMatrix();
+
+        draw_call_count++;
     }
 
     // What does this routine do?

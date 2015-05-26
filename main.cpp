@@ -14,7 +14,7 @@ using namespace std;
 // a few global variables. For example...
 
 // YOUR_CREATURE_TYPE	gYourCreatureCollectionDataStruct;
-World *g_test_world = new World(1);
+World *g_test_world = new World(6);
 
 int gWinRows = 500;
 int gWinCols = 500;
