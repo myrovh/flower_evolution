@@ -26,8 +26,8 @@ World::World(int world_size) {
     }
 
     this->world_size = world_size;
-    grid_spacing_x = 30;
-    grid_spacing_y = 30;
+    grid_spacing_x = 50;
+    grid_spacing_y = 50;
 
     parent_1 = nullptr;
     parent_2 = nullptr;

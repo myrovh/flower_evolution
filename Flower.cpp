@@ -11,28 +11,32 @@ const double Flower::range_max = 1.0;
 const int Flower::crossover_frequency = 2;
 const double Flower::mutation_chance = 0.15;
 const unsigned long Flower::fixed_seed = 42;
+const double Flower::selection_box_size = 20.0;
 
 Flower::Flower() {
-    flower_genes[petal_radius] = generate_large_values(generate_value(true));
-    flower_genes[red] = generate_value(false);
-    flower_genes[green] = generate_value(false);
-    flower_genes[blue] = generate_value(false);
-    flower_genes[number_of_edges] = generate_large_values(generate_value(true));
-    flower_genes[ring_diameter] = generate_large_values(generate_value(true));
-    flower_genes[number_of_petals] = generate_large_values(generate_value(true));
+    flower_genes[petal_radius] = generate_value();
+    flower_genes[red] = generate_colour_value();
+    flower_genes[green] = generate_colour_value();
+    flower_genes[blue] = generate_colour_value();
+    flower_genes[number_of_edges] = generate_value();
+    flower_genes[ring_diameter] = generate_value();
+    flower_genes[number_of_petals] = generate_value();
     is_selected = false;
 }
 
-double Flower::generate_value(bool clamp) {
+double Flower::generate_value() {
     //To get same values every time replace random() with fixed_seed
     static std::random_device random;
     static std::default_random_engine engine{(unsigned long) random()};
-    if (clamp) {
-        static std::uniform_int_distribution<int> int_distribution{(int) (Flower::range_min * 10),
-                                                                   (int) (Flower::range_max * 10)};
-        double value = ((double) int_distribution(engine)) / 10;
-        return value;
-    }
+    static std::uniform_int_distribution<int> int_distribution{(int) (2),
+                                                               (int) (20)};
+    double value = ((double) int_distribution(engine));
+    return value;
+}
+
+double Flower::generate_colour_value() {
+    static std::random_device random;
+    static std::default_random_engine engine{(unsigned long) random()};
     static std::uniform_real_distribution<double> distribution{Flower::range_min, Flower::range_max};
     return distribution(engine);
 }
@@ -46,6 +50,32 @@ std::string Flower::get_flower_stats() {
 
     temp_string = stream.str();
     return temp_string;
+}
+
+void Flower::draw_petal_ring() {
+    glPushMatrix();
+    for (int i = 0; i < number_of_petals; i++) {
+        glPushMatrix();
+        glTranslated(ring_diameter * cos(i * 2.0 * M_PI / number_of_petals),
+                     ring_diameter * sin(i * 2.0 * M_PI / number_of_petals), 0);
+
+        glRotated((double) i * 360 / (double) number_of_petals, 0.0, 0.0, 1.0);
+
+        draw_petal();
+
+        glPopMatrix();
+    }
+
+    if (is_selected) {
+        glColor3d(1.0, 0.0, 0.0);
+
+        glBegin(GL_LINE_LOOP);
+        glVertex2f((GLfloat) -selection_box_size, (GLfloat) selection_box_size);
+        glVertex2f((GLfloat) selection_box_size, (GLfloat) selection_box_size);
+        glVertex2f((GLfloat) selection_box_size, (GLfloat) -selection_box_size);
+        glVertex2f((GLfloat) -selection_box_size, (GLfloat) -selection_box_size);
+        glEnd();
+    }
 }
 
 void Flower::draw_petal() {
@@ -70,16 +100,6 @@ void Flower::draw_petal() {
 
     glEnd();
 
-    if (is_selected) {
-        glColor3d(1.0, 0.0, 0.0);
-
-        glBegin(GL_LINE_LOOP);
-        glVertex2f((GLfloat) -10.0, (GLfloat) 10.0);
-        glVertex2f((GLfloat) 10.0, (GLfloat) 10.0);
-        glVertex2f((GLfloat) 10.0, (GLfloat) -10.0);
-        glVertex2f((GLfloat) -10.0, (GLfloat) -10.0);
-        glEnd();
-    }
 }
 
 Flower Flower::crossover(Flower other) {
@@ -105,13 +125,14 @@ Flower Flower::crossover(Flower other) {
 Flower Flower::mutate() {
     Flower new_flower = *this;
     for (auto p : flower_genes) {
-        if (mutation_chance > generate_value(false)) {
+        if (mutation_chance > generate_colour_value()) {
             std::cout << "mutation occured at " << p.first << "\n";
-            if (p.first == petal_radius || p.first == number_of_edges) {
-                new_flower.flower_genes.at(p.first) = generate_large_values(generate_value(true));
+            if (p.first == petal_radius || p.first == number_of_edges || p.first == ring_diameter ||
+                p.first == number_of_petals) {
+                new_flower.flower_genes.at(p.first) = generate_value();
             }
             else {
-                new_flower.flower_genes.at(p.first) = generate_value(false);
+                new_flower.flower_genes.at(p.first) = generate_colour_value();
             }
         }
     }
@@ -130,3 +151,4 @@ Flower::Flower(double petal, double red_number, double green_number, double blue
     is_selected = false;
 
 }
+

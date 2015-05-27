@@ -30,6 +30,7 @@ public:
     static const int crossover_frequency;
     static const double mutation_chance;
     static const unsigned long fixed_seed;
+    static const double selection_box_size;
     bool is_selected;
     flower_genotype flower_genes;
 
@@ -38,13 +39,17 @@ public:
     Flower(double petal, double red, double green, double blue, double number_of_edges, double ring,
            double petals_count);
 
-    double generate_value(bool clamp);
+    double generate_value();
+
+    double generate_colour_value();
 
     Flower crossover(Flower other);
 
     Flower mutate();
 
     void draw_petal();
+
+    void draw_petal_ring();
     std::string get_flower_stats();
 
 private:

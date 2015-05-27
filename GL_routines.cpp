@@ -61,7 +61,7 @@ void displayWorld(void) {
         glPushMatrix();
         std::pair<int, int> grid_location = g_test_world->get_flower_location(draw_call_count);
         glTranslated(grid_location.first, grid_location.second, 0);
-        f->draw_petal();
+        f->draw_petal_ring();
         glPopMatrix();
         //END
 
@@ -69,7 +69,7 @@ void displayWorld(void) {
         std::stringstream stream;
         stream << draw_call_count;
         glPushMatrix();
-        glTranslated(grid_location.first, grid_location.second - 15, 0);
+        glTranslated(grid_location.first, grid_location.second - 18, 0);
         glScalef(0.03, 0.03, 0.03);
         for (auto character = stream.str().begin(); character < stream.str().end(); character++) {
             glutStrokeCharacter(GLUT_STROKE_ROMAN, (*character));
