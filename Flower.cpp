@@ -12,12 +12,11 @@ const double Flower::mutation_chance = 0.15;
 const unsigned long Flower::fixed_seed = 42;
 
 Flower::Flower() {
-    flower_genes[petal_radius] = 10 * generate_value(false);
+    flower_genes[petal_radius] = generate_large_values(generate_value(true));
     flower_genes[red] = generate_value(false);
     flower_genes[green] = generate_value(false);
     flower_genes[blue] = generate_value(false);
-    double edge_value = 10 * generate_value(true);
-    flower_genes[number_of_edges] = edge_value > 1.0 ? edge_value : 2.0;
+    flower_genes[number_of_edges] = generate_large_values(generate_value(true));
     is_selected = false;
 }
 

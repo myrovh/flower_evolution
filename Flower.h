@@ -41,6 +41,11 @@ public:
 
 private:
     flower_genotype flower_genes;
+
+    double generate_large_values(double in) {
+        double out = in * 10;
+        return out > 1.0 ? out : 2.0;
+    }
 };
 
 #endif //FIT3094_AI_ASSIGNMENT2_FLOWER_H
