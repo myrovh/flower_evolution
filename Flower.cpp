@@ -8,7 +8,6 @@
 
 const double Flower::range_min = 0.0;
 const double Flower::range_max = 1.0;
-const int Flower::crossover_frequency = 2;
 const double Flower::mutation_chance = 0.15;
 const unsigned long Flower::fixed_seed = 42;
 const double Flower::selection_box_size = 20.0;
@@ -28,8 +27,7 @@ double Flower::generate_value() {
     //To get same values every time replace random() with fixed_seed
     static std::random_device random;
     static std::default_random_engine engine{(unsigned long) random()};
-    static std::uniform_int_distribution<int> int_distribution{(int) (2),
-                                                               (int) (10)};
+    static std::uniform_int_distribution<int> int_distribution{2, 10};
     double value = ((double) int_distribution(engine));
     return value;
 }
@@ -106,11 +104,13 @@ Flower Flower::crossover(Flower other) {
     Flower *current = this;
     Flower *next = &other;
     Flower new_flower;
+    int crossover_frequency = generate_crossover(flower_genes.size());
+    std::cout << "crossover point: " << crossover_frequency << std::endl;
 
     //TODO add checks for invalid values
     for (int count = 0; count < flower_genes.size(); count++) {
         // Swap pointers
-        if (!count % crossover_frequency == 0) {
+        if (count == crossover_frequency) {
             Flower *temp = current;
             current = next;
             next = temp;
@@ -152,3 +152,10 @@ Flower::Flower(double petal, double red_number, double green_number, double blue
 
 }
 
+int Flower::generate_crossover(int length) {
+    //To get same values every time replace random() with fixed_seed
+    static std::random_device random;
+    static std::default_random_engine engine{(unsigned long) random()};
+    std::uniform_int_distribution<int> int_distribution{0, length};
+    return int_distribution(engine);
+}

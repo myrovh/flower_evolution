@@ -27,7 +27,6 @@ class Flower {
 public:
     static const double range_min;
     static const double range_max;
-    static const int crossover_frequency;
     static const double mutation_chance;
     static const unsigned long fixed_seed;
     static const double selection_box_size;
@@ -42,6 +41,8 @@ public:
     double generate_value();
 
     double generate_colour_value();
+
+    int generate_crossover(int length);
 
     Flower crossover(Flower other);
 
