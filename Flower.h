@@ -1,6 +1,9 @@
-//
-// Created by myrovh on 5/20/15.
-//
+/*
+ * This software is the original work of Dyson Hamilton. ID: 23390662
+ * This software is submitted in partial fulfilment of the
+ * requirements for the degree of Information Technology.
+ * Monash University
+ */
 
 #ifndef FIT3094_AI_ASSIGNMENT2_FLOWER_H
 #define FIT3094_AI_ASSIGNMENT2_FLOWER_H

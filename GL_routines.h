@@ -1,9 +1,8 @@
 /*
- *  GL_routines.h
- *
- *  Created by Alan Dorin on Fri May 24 2002.
- *  Copyright (c) 2001 __MyCompanyName__. All rights reserved.
- *
+ * This software is the original work of Dyson Hamilton. ID: 23390662
+ * This software is submitted in partial fulfilment of the
+ * requirements for the degree of Information Technology.
+ * Monash University
  */
 
 #ifndef GL_ROUTINES

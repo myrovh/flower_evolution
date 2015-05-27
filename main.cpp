@@ -1,7 +1,9 @@
-//
-//  main.m
-//
-//  Created by Alan Dorin
+/*
+ * This software is the original work of Dyson Hamilton. ID: 23390662
+ * This software is submitted in partial fulfilment of the
+ * requirements for the degree of Information Technology.
+ * Monash University
+ */
 
 #include <iostream>
 

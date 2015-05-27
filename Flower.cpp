@@ -1,6 +1,9 @@
-//
-// Created by myrovh on 5/20/15.
-//
+/*
+ * This software is the original work of Dyson Hamilton. ID: 23390662
+ * This software is submitted in partial fulfilment of the
+ * requirements for the degree of Information Technology.
+ * Monash University
+ */
 
 #include <iostream>
 #include "Flower.h"
