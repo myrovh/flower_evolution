@@ -29,7 +29,7 @@ double Flower::generate_value() {
     static std::random_device random;
     static std::default_random_engine engine{(unsigned long) random()};
     static std::uniform_int_distribution<int> int_distribution{(int) (2),
-                                                               (int) (20)};
+                                                               (int) (10)};
     double value = ((double) int_distribution(engine));
     return value;
 }

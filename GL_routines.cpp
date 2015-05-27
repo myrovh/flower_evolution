@@ -23,7 +23,7 @@ void generate_new_world() {
 }
 
 void generate_new_world(Flower child) {
-    //g_test_world->deselect_all_parents();
+    g_test_world->deselect_all_parents();
     g_test_world->flower_container.clear();
     for (int count = 0; count < g_test_world->number_of_flowers; count++) {
         Flower insert_flower = child.mutate();
