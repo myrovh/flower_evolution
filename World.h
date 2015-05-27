@@ -23,6 +23,10 @@ public:
 
     Flower mate_flowers();
 
+    static World *generate_new_world(World *pointer);
+
+    static World *generate_new_world(World *pointer, Flower child);
+
 private:
     const static int range_min;
     const static int range_max;

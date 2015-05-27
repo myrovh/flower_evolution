@@ -16,12 +16,13 @@ extern std::string input_stream;
 
 bool evolve = false;
 
+/*
 void generate_new_world() {
     //g_test_world->deselect_all_parents();
-    delete g_test_world;
-    g_test_world = new World(4);
 }
 
+ */
+/*
 void generate_new_world(Flower child) {
     g_test_world->deselect_all_parents();
     g_test_world->flower_container.clear();
@@ -35,6 +36,7 @@ void generate_new_world(Flower child) {
         std::cout << "\nChild Flower: \n" << g_test_world->flower_container.at(count)->get_flower_stats();
     }
 }
+ */
 
 extern void cleanQuit();
 
@@ -147,11 +149,11 @@ void keyboard(unsigned char key, int x, int y) {
             input_stream = "";
             break;
         case 'm': {
-            evolve = true;
+            g_test_world->generate_new_world(g_test_world, g_test_world->mate_flowers());
             break;
         }
         case 'r':
-            generate_new_world();
+            g_test_world->generate_new_world(g_test_world);
             break;
         default:
             break;
@@ -208,16 +210,6 @@ void visible(int vis) {
 }
 
 void updateWorld(void) {
-    // Update your gYourCreatureCollectionDataStruct here
-    // for example call gYourCreatureCollectionDataStruct->update() and
-    // maybe call gYourPlayerCharacterDataStruct->update() if any non-player controlled aspects need to be updated
-
-    if (evolve) {
-
-        generate_new_world(g_test_world->mate_flowers());
-        evolve = false;
-    }
-    // then request a redraw of the display by posting a "redraw" event
     glutPostRedisplay();
 }
 

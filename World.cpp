@@ -2,6 +2,7 @@
 // Created by myrovh on 5/26/15.
 //
 
+#include <iostream>
 #include "World.h"
 
 extern int gWinRows;
@@ -82,4 +83,26 @@ Flower World::mate_flowers() {
         new_flower = parent_1->crossover(*parent_2);
     }
     return new_flower;
+}
+
+World *World::generate_new_world(World *pointer, Flower child) {
+    pointer->deselect_all_parents();
+    pointer->flower_container.clear();
+    for (int count = 0; count < pointer->number_of_flowers; count++) {
+        Flower insert_flower = child.mutate();
+        pointer->flower_container.push_back(
+                new Flower(insert_flower.flower_genes[petal_radius], insert_flower.flower_genes[red],
+                           insert_flower.flower_genes[green], insert_flower.flower_genes[blue],
+                           insert_flower.flower_genes[number_of_edges], insert_flower.flower_genes[ring_diameter],
+                           insert_flower.flower_genes[number_of_petals]));
+        std::cout << "\nChild Flower: \n" << pointer->flower_container.at(count)->get_flower_stats();
+    }
+    return pointer;
+}
+
+World *World::generate_new_world(World *pointer) {
+    int size = pointer->world_size;
+    delete pointer;
+    pointer = new World(size);
+    return pointer;
 }
