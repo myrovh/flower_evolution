@@ -4,7 +4,6 @@
 //  Created by Alan Dorin
 
 #include <iostream>
-#include <math.h>
 
 #include "GL_routines.h"
 #include "World.h"
@@ -14,11 +13,12 @@ using namespace std;
 // a few global variables. For example...
 
 // YOUR_CREATURE_TYPE	gYourCreatureCollectionDataStruct;
-World *g_test_world = new World(6);
+World *g_test_world = new World(4);
 std::string input_stream;
 
 int gWinRows = 500;
 int gWinCols = 500;
+
 
 // Define a function which will always exit your program cleanly
 

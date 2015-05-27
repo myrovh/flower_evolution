@@ -33,11 +33,13 @@ public:
 
     Flower();
 
+    Flower(double petal, double red, double green, double blue, double number_of_edges);
+
     double generate_value(bool clamp);
 
     Flower crossover(Flower other);
 
-    void mutate();
+    Flower mutate();
 
     void draw_petal();
     std::string get_flower_stats();

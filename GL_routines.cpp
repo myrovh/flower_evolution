@@ -10,11 +10,32 @@
 #include "GL_routines.h"
 #include "World.h"
 
-extern void cleanQuit();
-
 extern World *g_test_world;
 
 extern std::string input_stream;
+
+bool evolve = false;
+
+void generate_new_world() {
+    //g_test_world->deselect_all_parents();
+    delete g_test_world;
+    g_test_world = new World(4);
+}
+
+void generate_new_world(Flower child) {
+    //g_test_world->deselect_all_parents();
+    g_test_world->flower_container.clear();
+    for (int count = 0; count < g_test_world->number_of_flowers; count++) {
+        Flower insert_flower = child.mutate();
+        g_test_world->flower_container.push_back(
+                new Flower(insert_flower.flower_genes[petal_radius], insert_flower.flower_genes[red],
+                           insert_flower.flower_genes[green], insert_flower.flower_genes[blue],
+                           insert_flower.flower_genes[number_of_edges]));
+        std::cout << "\nChild Flower: \n" << g_test_world->flower_container.at(count)->get_flower_stats();
+    }
+}
+
+extern void cleanQuit();
 
 void myInitializeOpenGL(void) {
     // Set the background/clear-the-screen colour
@@ -125,11 +146,12 @@ void keyboard(unsigned char key, int x, int y) {
             input_stream = "";
             break;
         case 'm': {
-            Flower test = g_test_world->mate_flowers();
-            test.mutate();
-            std::cout << "\nChild Flower: \n" << test.get_flower_stats();
+            evolve = true;
             break;
         }
+        case 'r':
+            generate_new_world();
+            break;
         default:
             break;
     }
@@ -189,6 +211,11 @@ void updateWorld(void) {
     // for example call gYourCreatureCollectionDataStruct->update() and
     // maybe call gYourPlayerCharacterDataStruct->update() if any non-player controlled aspects need to be updated
 
+    if (evolve) {
+
+        generate_new_world(g_test_world->mate_flowers());
+        evolve = false;
+    }
     // then request a redraw of the display by posting a "redraw" event
     glutPostRedisplay();
 }

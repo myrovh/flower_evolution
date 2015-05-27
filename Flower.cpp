@@ -100,16 +100,29 @@ Flower Flower::crossover(Flower other) {
     return new_flower;
 }
 
-void Flower::mutate() {
+Flower Flower::mutate() {
+    Flower new_flower = *this;
     for (auto p : flower_genes) {
         if (mutation_chance > generate_value(false)) {
             std::cout << "mutation occured at " << p.first << "\n";
             if (p.first == petal_radius || p.first == number_of_edges) {
-                this->flower_genes.at(p.first) = generate_large_values(generate_value(true));
+                new_flower.flower_genes.at(p.first) = generate_large_values(generate_value(true));
             }
             else {
-                this->flower_genes.at(p.first) = generate_value(false);
+                new_flower.flower_genes.at(p.first) = generate_value(false);
             }
         }
     }
+    return new_flower;
+}
+
+Flower::Flower(double petal, double red_number, double green_number, double blue_number,
+               double number_of_edges_number) {
+    flower_genes[petal_radius] = petal;
+    flower_genes[red] = red_number;
+    flower_genes[green] = green_number;
+    flower_genes[blue] = blue_number;
+    flower_genes[number_of_edges] = number_of_edges_number;
+    is_selected = false;
+
 }

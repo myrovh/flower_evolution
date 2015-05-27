@@ -10,27 +10,28 @@
 
 class World {
 public:
-    World(int world_size);
-
+    int number_of_flowers;
     std::vector<Flower *> flower_container;
+
+    World(int world_size);
 
     std::pair<int, int> get_flower_location(int flower_position);
 
     void selection_check(std::string input_string);
+
+    void deselect_all_parents();
 
     Flower mate_flowers();
 
 private:
     const static int range_min;
     const static int range_max;
-    int number_of_flowers;
     int grid_spacing_x;
     int grid_spacing_y;
     int world_size;
     Flower *parent_1;
     Flower *parent_2;
 
-    void deselect_all_parents();
 };
 
 #endif //FIT3094_AI_ASSIGNMENT2_WORLD_H
