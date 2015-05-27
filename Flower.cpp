@@ -18,6 +18,8 @@ Flower::Flower() {
     flower_genes[green] = generate_value(false);
     flower_genes[blue] = generate_value(false);
     flower_genes[number_of_edges] = generate_large_values(generate_value(true));
+    flower_genes[ring_diameter] = generate_large_values(generate_value(true));
+    flower_genes[number_of_petals] = generate_large_values(generate_value(true));
     is_selected = false;
 }
 
@@ -117,12 +119,14 @@ Flower Flower::mutate() {
 }
 
 Flower::Flower(double petal, double red_number, double green_number, double blue_number,
-               double number_of_edges_number) {
+               double number_of_edges_number, double ring, double petals_count) {
     flower_genes[petal_radius] = petal;
     flower_genes[red] = red_number;
     flower_genes[green] = green_number;
     flower_genes[blue] = blue_number;
     flower_genes[number_of_edges] = number_of_edges_number;
+    flower_genes[ring_diameter] = ring;
+    flower_genes[number_of_petals] = petals_count;
     is_selected = false;
 
 }

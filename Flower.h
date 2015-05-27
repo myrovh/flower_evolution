@@ -17,7 +17,9 @@ enum flower_gene {
     red,
     green,
     blue,
-    number_of_edges
+    number_of_edges,
+    ring_diameter,
+    number_of_petals
 };
 typedef std::map<flower_gene, double> flower_genotype;
 
@@ -33,7 +35,8 @@ public:
 
     Flower();
 
-    Flower(double petal, double red, double green, double blue, double number_of_edges);
+    Flower(double petal, double red, double green, double blue, double number_of_edges, double ring,
+           double petals_count);
 
     double generate_value(bool clamp);
 

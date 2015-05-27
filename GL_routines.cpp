@@ -30,7 +30,8 @@ void generate_new_world(Flower child) {
         g_test_world->flower_container.push_back(
                 new Flower(insert_flower.flower_genes[petal_radius], insert_flower.flower_genes[red],
                            insert_flower.flower_genes[green], insert_flower.flower_genes[blue],
-                           insert_flower.flower_genes[number_of_edges]));
+                           insert_flower.flower_genes[number_of_edges], insert_flower.flower_genes[ring_diameter],
+                           insert_flower.flower_genes[number_of_petals]));
         std::cout << "\nChild Flower: \n" << g_test_world->flower_container.at(count)->get_flower_stats();
     }
 }
