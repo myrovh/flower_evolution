@@ -124,8 +124,12 @@ void keyboard(unsigned char key, int x, int y) {
             g_test_world->selection_check(input_stream);
             input_stream = "";
             break;
+        case 'm': {
+            Flower test = g_test_world->mate_flowers();
+            std::cout << "\nChild Flower: \n" << test.get_flower_stats();
+            break;
+        }
         default:
-            // Do something or nothing by default when a key you haven't used is pressed here...
             break;
     }
 }

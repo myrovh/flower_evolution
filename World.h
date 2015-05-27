@@ -18,6 +18,8 @@ public:
 
     void selection_check(std::string input_string);
 
+    Flower mate_flowers();
+
 private:
     const static int range_min;
     const static int range_max;

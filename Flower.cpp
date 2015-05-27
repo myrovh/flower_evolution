@@ -7,7 +7,7 @@
 
 const double Flower::range_min = 0.0;
 const double Flower::range_max = 1.0;
-const int Flower::crossover_frequency = 1;
+const int Flower::crossover_frequency = 2;
 const double Flower::mutation_chance = 0.15;
 const unsigned long Flower::fixed_seed = 42;
 
@@ -24,9 +24,10 @@ Flower::Flower() {
 double Flower::generate_value(bool clamp) {
     //To get same values every time replace random() with fixed_seed
     static std::random_device random;
-    static std::default_random_engine engine{random()};
+    static std::default_random_engine engine{(unsigned long) random()};
     if (clamp) {
-        static std::uniform_int_distribution<int> int_distribution{Flower::range_min * 10, Flower::range_max * 10};
+        static std::uniform_int_distribution<int> int_distribution{(int) (Flower::range_min * 10),
+                                                                   (int) (Flower::range_max * 10)};
         double value = ((double) int_distribution(engine)) / 10;
         return value;
     }
@@ -77,4 +78,24 @@ void Flower::draw_petal() {
         glVertex2f((GLfloat) -10.0, (GLfloat) -10.0);
         glEnd();
     }
+}
+
+Flower Flower::crossover(Flower other) {
+    Flower *current = this;
+    Flower *next = &other;
+    Flower new_flower;
+
+    //TODO add checks for invalid values
+    for (int count = 0; count < flower_genes.size(); count++) {
+        // Swap pointers
+        if (!count % crossover_frequency == 0) {
+            Flower *temp = current;
+            current = next;
+            next = temp;
+        }
+
+        //Insert parent value into child
+        new_flower.flower_genes.at((flower_gene) count) = current->flower_genes.at((flower_gene) count);
+    }
+    return new_flower;
 }

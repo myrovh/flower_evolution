@@ -46,6 +46,7 @@ std::pair<int, int> World::get_flower_location(int flower_position) {
             count++;
         }
     }
+    return std::pair<int, int>(0, 0);
 }
 
 void World::selection_check(std::string input_string) {
@@ -73,4 +74,12 @@ void World::deselect_all_parents() {
     parent_2->is_selected = false;
     parent_1 = nullptr;
     parent_2 = nullptr;
+}
+
+Flower World::mate_flowers() {
+    Flower new_flower;
+    if (parent_1 != nullptr && parent_2 != nullptr) {
+        new_flower = parent_1->crossover(*parent_2);
+    }
+    return new_flower;
 }
