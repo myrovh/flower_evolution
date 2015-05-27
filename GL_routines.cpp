@@ -126,6 +126,7 @@ void keyboard(unsigned char key, int x, int y) {
             break;
         case 'm': {
             Flower test = g_test_world->mate_flowers();
+            test.mutate();
             std::cout << "\nChild Flower: \n" << test.get_flower_stats();
             break;
         }

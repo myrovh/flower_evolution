@@ -29,6 +29,7 @@ public:
     static const double mutation_chance;
     static const unsigned long fixed_seed;
     bool is_selected;
+    flower_genotype flower_genes;
 
     Flower();
 
@@ -36,11 +37,12 @@ public:
 
     Flower crossover(Flower other);
 
+    void mutate();
+
     void draw_petal();
     std::string get_flower_stats();
 
 private:
-    flower_genotype flower_genes;
 
     double generate_large_values(double in) {
         double out = in * 10;

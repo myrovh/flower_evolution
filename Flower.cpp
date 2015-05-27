@@ -2,6 +2,7 @@
 // Created by myrovh on 5/20/15.
 //
 
+#include <iostream>
 #include "Flower.h"
 
 
@@ -97,4 +98,18 @@ Flower Flower::crossover(Flower other) {
         new_flower.flower_genes.at((flower_gene) count) = current->flower_genes.at((flower_gene) count);
     }
     return new_flower;
+}
+
+void Flower::mutate() {
+    for (auto p : flower_genes) {
+        if (mutation_chance > generate_value(false)) {
+            std::cout << "mutation occured at " << p.first << "\n";
+            if (p.first == petal_radius || p.first == number_of_edges) {
+                this->flower_genes.at(p.first) = generate_large_values(generate_value(true));
+            }
+            else {
+                this->flower_genes.at(p.first) = generate_value(false);
+            }
+        }
+    }
 }
