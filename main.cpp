@@ -16,8 +16,8 @@ using namespace std;
 World *g_test_world = new World(4);
 std::string input_stream;
 
-int gWinRows = 500;
-int gWinCols = 500;
+int gWinRows = 700;
+int gWinCols = 700;
 
 
 // Define a function which will always exit your program cleanly

@@ -27,8 +27,8 @@ double Flower::generate_value() {
     //To get same values every time replace random() with fixed_seed
     static std::random_device random;
     static std::default_random_engine engine{(unsigned long) random()};
-    static std::uniform_int_distribution<int> int_distribution{2, 10};
-    double value = ((double) int_distribution(engine));
+    static std::uniform_int_distribution<int> int_distribution{2, 100};
+    double value = ((double) int_distribution(engine) / 10);
     return value;
 }
 
