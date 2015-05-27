@@ -14,30 +14,6 @@ extern World *g_test_world;
 
 extern std::string input_stream;
 
-bool evolve = false;
-
-/*
-void generate_new_world() {
-    //g_test_world->deselect_all_parents();
-}
-
- */
-/*
-void generate_new_world(Flower child) {
-    g_test_world->deselect_all_parents();
-    g_test_world->flower_container.clear();
-    for (int count = 0; count < g_test_world->number_of_flowers; count++) {
-        Flower insert_flower = child.mutate();
-        g_test_world->flower_container.push_back(
-                new Flower(insert_flower.flower_genes[petal_radius], insert_flower.flower_genes[red],
-                           insert_flower.flower_genes[green], insert_flower.flower_genes[blue],
-                           insert_flower.flower_genes[number_of_edges], insert_flower.flower_genes[ring_diameter],
-                           insert_flower.flower_genes[number_of_petals]));
-        std::cout << "\nChild Flower: \n" << g_test_world->flower_container.at(count)->get_flower_stats();
-    }
-}
- */
-
 extern void cleanQuit();
 
 void myInitializeOpenGL(void) {
@@ -149,7 +125,9 @@ void keyboard(unsigned char key, int x, int y) {
             input_stream = "";
             break;
         case 'm': {
-            g_test_world->generate_new_world(g_test_world, g_test_world->mate_flowers());
+            if (g_test_world->parent_2 != nullptr && g_test_world->parent_1 != nullptr) {
+                g_test_world->generate_new_world(g_test_world, g_test_world->mate_flowers());
+            }
             break;
         }
         case 'r':

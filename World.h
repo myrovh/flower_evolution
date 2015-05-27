@@ -12,6 +12,8 @@ class World {
 public:
     int number_of_flowers;
     std::vector<Flower *> flower_container;
+    Flower *parent_1;
+    Flower *parent_2;
 
     World(int world_size);
 
@@ -33,8 +35,6 @@ private:
     int grid_spacing_x;
     int grid_spacing_y;
     int world_size;
-    Flower *parent_1;
-    Flower *parent_2;
 
 };
 
